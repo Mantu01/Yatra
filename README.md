@@ -14,9 +14,7 @@
 - 📱 Fully responsive design for all devices
 
 ## 🏗️ Tech Stack
-- **Frontend:** React.js, Tailwind CSS, i18next (for multi-language support)
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
+- **Frontend:** React.js, Tailwind CSS
 - **Authentication:** Firebase/Auth0
 - **APIs:** Google Maps API, OpenWeather API
 
@@ -37,7 +35,6 @@
 │   │── LanguageContext.js
 │── 📂 hooks/
 │   │── useFetch.js
-│── i18n.js
 │── App.js
 │── index.js
 ```
@@ -57,15 +54,13 @@
    ```
 4. Run the development server:
    ```bash
-   npm start
+   npm run dev
    ```
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## 🌟 Contributing
 We welcome contributions! Feel free to open an issue or submit a pull request.
 
-## 📞 Contact
-For any queries, reach out to us at **support@yatra.com** or visit our [website](https://www.yatra.com).
 
 🚀 **Start your adventure today with Yatra!** ✈️
 
