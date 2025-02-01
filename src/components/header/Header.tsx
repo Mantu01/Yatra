@@ -26,11 +26,11 @@ function Header() {
   return (
     <>
       <div className="fixed z-10 h-20 w-full flex justify-center items-end text-white">
-        <div className={`h-[80%] w-[80vw] flex justify-between items-center border-b-2 border-white rounded-t-4xl px-4 py-2 text-xl max-text-[18px] ${isScrolled ? ' backdrop-blur-sm' : 'bg-transparent'}`}>
+        <div className={`h-[80%] w-[80vw] flex justify-between items-center border-b-2 border-white rounded-t-4xl px-4 py-2 ${isScrolled ? ' backdrop-blur-sm' : 'bg-transparent'}`}>
           <div className='text-2xl md:hidden block' onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <IoIosMenu />
           </div>
-          <div className={`absolute top-20 left-0 h-screen w-full transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden`} onClick={closeMenu}>
+          <div className={`absolute z-20 top-20 left-0 h-screen w-full transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden`} onClick={closeMenu}>
             <div className="h-1/2 w-2/3 backdrop-blur-lg" onClick={(e) => e.stopPropagation()}>
               <NavOptions closeMenu={closeMenu} />
             </div>
