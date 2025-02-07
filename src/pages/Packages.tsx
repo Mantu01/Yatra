@@ -7,12 +7,12 @@ function Packages() {
   const [maxPrice, setMaxPrice] = useState(5000);
 
   const packages = [
-    { id: 1, name: "Koh Samui", location: "Europe", tags: ["CULTURAL", "RELAX"], price: 700, img: "https://content.r9cdn.net/rimg/dimg/75/a7/44202281-city-56280-1767207b463.jpg?crop=true&width=1020&height=498", reviews: 4.5 },
-    { id: 2, name: "Bora Bora", location: "Asia", tags: ["HISTORY", "CULTURAL"], price: 500, oldPrice: 1000, img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/60/b0/bd/bora-bora.jpg?w=1400&h=500&s=1", reviews: 4.8 },
-    { id: 3, name: "Maldives", location: "Oceania", tags: ["SPORT", "RELAX"], price: 400, img: "https://maldivesfinest.com/wp-content/uploads/2017/02/velaa-banner2.jpg", reviews: 4.7 },
-    { id: 4, name: "Phuket", location: "Thailandia", tags: ["RELAX", "CULTURAL"], price: 1200, img: "https://d2bgjx2gb489de.cloudfront.net/gbb-blogs/wp-content/uploads/2023/05/18163914/16-Best-Beaches-in-Phuket-Thailand-2-870x400.jpg", reviews: 4.6 },
-    { id: 5, name: "Seychelles", location: "Netherlands", tags: ["HISTORY", "SPORT"], price: 1500, img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fb/42/seychelles.jpg?w=1400&h=500&s=1", reviews: 4.9 },
-    { id: 6, name: "Hawaii", location: "Italy", tags: ["RELAX", "SPORT"], price: 950, img: "https://www.celebritycruises.com/blog/content/uploads/2024/03/best-beaches-in-honolulu-waiki%CC%84ki%CC%84-beach-hero-1600x890.jpg", reviews: 4.4 },
+    { id: 1, duration:"5d", name: "Koh Samui", location: "Europe", tags: ["CULTURAL", "RELAX"], price: 700, img: "https://content.r9cdn.net/rimg/dimg/75/a7/44202281-city-56280-1767207b463.jpg?crop=true&width=1020&height=498", reviews: 4.5 },
+    { id: 2, duration:"5d", name: "Bora Bora", location: "Asia", tags: ["HISTORY", "CULTURAL"], price: 500, oldPrice: 1000, img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/60/b0/bd/bora-bora.jpg?w=1400&h=500&s=1", reviews: 4.8 },
+    { id: 3, duration:"5d", name: "Maldives", location: "Oceania", tags: ["SPORT", "RELAX"], price: 400, img: "https://maldivesfinest.com/wp-content/uploads/2017/02/velaa-banner2.jpg", reviews: 4.7 },
+    { id: 4, duration:"5d", name: "Phuket", location: "Thailandia", tags: ["RELAX", "CULTURAL"], price: 1200, img: "https://d2bgjx2gb489de.cloudfront.net/gbb-blogs/wp-content/uploads/2023/05/18163914/16-Best-Beaches-in-Phuket-Thailand-2-870x400.jpg", reviews: 4.6 },
+    { id: 5, duration:"5d", name: "Seychelles", location: "Netherlands", tags: ["HISTORY", "SPORT"], price: 1500, img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fb/42/seychelles.jpg?w=1400&h=500&s=1", reviews: 4.9 },
+    { id: 6, duration:"5d", name: "Hawaii", location: "Italy", tags: ["RELAX", "SPORT"], price: 950, img: "https://www.celebritycruises.com/blog/content/uploads/2024/03/best-beaches-in-honolulu-waiki%CC%84ki%CC%84-beach-hero-1600x890.jpg", reviews: 4.4 },
   ];
 
   return (

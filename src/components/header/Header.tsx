@@ -1,12 +1,18 @@
-import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
 import { IoIosMenu } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 import NavOptions from './NavOptions';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isLoggedIn = false; // Replace with actual login check
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +29,40 @@ function Header() {
     setIsMenuOpen(false);
   };
 
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if (!isSearchOpen) {
+      setTimeout(() => {
+        document.getElementById('search-input')?.focus();
+      }, 100);
+    }
+  };
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleClickOutside = (e: any) => {
+    if (isSearchOpen && !e.target.closest('.search-container')) {
+      setIsSearchOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isSearchOpen]);
+
+  const handleUserIconClick = () => {
+    if (isLoggedIn) {
+      navigate('/userProfile');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <>
       <div className="fixed z-10 h-20 w-full flex justify-center items-end text-white">
@@ -37,14 +77,27 @@ function Header() {
           </div>
           <div className='h-full w-1/6'>
             <NavLink to='/'>
-              <img className='h-12' src="/logo.png" alt="Logo" />
+              <img className='h-10' src="/logo.png" alt="Logo" />
             </NavLink>
           </div>
           <div className='h-full w-2/3 hidden md:block'>
             <NavOptions />
           </div>
-          <div className=' w-1/6 flex justify-end'>
-            <CiSearch className=' text-white text-3xl' />
+          <div className='w-1/6 flex justify-end items-center gap-5 search-container relative'>
+            <CiSearch className='text-white text-3xl cursor-pointer' onClick={toggleSearch} />
+            {isSearchOpen && (
+              <input
+                id="search-input"
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="absolute top-full mt-5 border-2 border-black backdrop-blur-2xl outline-none rounded-md px-2 py-1 w-48 shadow-inner shadow-black"
+                placeholder="Search..."
+              />
+            )}
+            {location.pathname !== '/login' && location.pathname !== '/signup' && (
+              <FaUserCircle className='text-white text-3xl cursor-pointer' onClick={handleUserIconClick} />
+            )}
           </div>
         </div>
       </div>
