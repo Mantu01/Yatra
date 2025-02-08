@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+import authService from '../firebase/authService';
 
 function Login() {
   return (
@@ -38,6 +40,14 @@ function Login() {
             type="submit"
           >
             LOGIN
+          </button>
+          <button
+            onClick={()=>authService.signInWithGoogle()}
+            className="w-full bg-white hover:bg-gray-100 text-gray-800 font-medium py-3 rounded-lg transition duration-300 mt-4 flex items-center justify-center border border-gray-300 shadow-sm"
+            type="button"
+          >
+            <FcGoogle className="mr-2 text-xl" /> {/* Increased icon size */}
+            Login with Google
           </button>
         </form>
         <div className="mt-4 text-center text-gray-300">

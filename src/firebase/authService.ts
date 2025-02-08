@@ -1,47 +1,79 @@
-import { getAuth,createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "./app.ts";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+import { app } from "./app";
+import { userFormat } from "../utils/userFormat";
 
-export class AuthService{
-   auth;
 
-   constructor(){
-      this.auth = getAuth(app);
-   }
+interface UserData {
+   id?: string;
+   name: string;
+   email: string;
+   password: string;
+   phone?: string;
+   imgUrl?: string;
+   isVerified?: boolean;
+ }
 
-   //sign up
+interface CreateAccountParams {
+  email: string;
+  password: string;
+  name: string;
+  imgUrl?: string;
+  phone?: string;
+}
 
-   async createAccount({ email, password,displayName}:{ email: string, password: string,displayName: string}){
-     try {
-        const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-        await updateProfile(userCredential.user,{displayName: displayName})
-        console.log(userCredential);
-        
-        return userCredential.user;
-     } catch (error) {
-        console.error("Error creating user:", error);
-     }
-   };
+interface LoginParams {
+  email: string;
+  password: string;
+}
 
-   async login({email,password}:{email: string, password: string}){
-      try {
-         const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
-         console.log(userCredential);
-         return userCredential.user;
-      } catch (error) {
-         console.error("Error logging in:", error);
-      }
-   }
+export class AuthService {
+  private auth = getAuth(app);
+  private provider = new GoogleAuthProvider();
 
-   // async updateProfile(){
-   //    try {
-   //       await updateProfile(this.auth.currentUser, {displayName: 'New Name'});
-   //       console.log('Profile updated successfully');
-   //    } catch (error) {
-   //       console.error('Error updating profile:', error);
-   //    }
-   // }
-};
+  // ✅ Sign up
+  async createAccount({ email, password, name, imgUrl }: CreateAccountParams): Promise<UserData | undefined> {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      await updateProfile(userCredential.user, {
+        displayName: name,
+        photoURL: imgUrl,
+      });
+      return userFormat(userCredential.user); // ✅ Returns UserData
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  }
 
-const authService=new AuthService();
+  // ✅ Login
+  async login({ email, password }: LoginParams): Promise<UserData | undefined> {
+    try {
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      return userFormat(userCredential.user); // ✅ Returns UserData
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  }
 
+  // ✅ Google Sign-in
+  async signInWithGoogle(): Promise<UserData | undefined> {
+    try {
+      const response = await signInWithPopup(this.auth, this.provider);
+      return userFormat(response.user); // ✅ Returns UserData
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+    }
+  }
+
+  // ✅ Logout
+  async logout(): Promise<void> {
+    try {
+      await signOut(this.auth);
+      console.log("User logged out");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  }
+}
+
+const authService = new AuthService();
 export default authService;
