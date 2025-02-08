@@ -21,9 +21,14 @@ export class UserService {
   private auth = getAuth(app);
 
   async getUser(): Promise<UserData | null> {
-    console.log(this.auth.currentUser);
-    
-    return userFormat(this.auth.currentUser);
+    return new Promise<UserData | null>((resolve) => {
+      const unsubscribe = this.auth.onAuthStateChanged((user) => {
+        console.log(user);
+        
+        resolve(userFormat(user));
+        unsubscribe();
+      });
+    });
   }
 
   async updateUserProfile(params: UpdateProfileParams): Promise<User | undefined> {

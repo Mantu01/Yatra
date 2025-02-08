@@ -4,6 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosMenu } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import NavOptions from './NavOptions';
+import { useAppSelector } from '../../store/store';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,7 +13,7 @@ function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-  const isLoggedIn = false; // Replace with actual login check
+  const {isLoggedIn}=useAppSelector(state=>state.user);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -1,13 +1,35 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../store/store';
+import { logout } from '../features/userSlice';
+import authService from '../firebase/authService';
+import { useNavigate } from 'react-router-dom';
+
 function UserProfile() {
+  const userData = useSelector((state: RootState) => state.user.userData);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await authService.logout();
+    dispatch(logout());
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white p-6 pt-28">
-
       <section className="flex flex-col md:flex-row items-center text-center md:text-left py-10 gap-6">
-        <img src="a.jpg" className="h-40 w-40 rounded-full border-4 border-blue-500" alt="User Profile" />
+        <img src={userData?.imgUrl || "default-profile.png"} className="h-40 w-40 rounded-full border-4 border-blue-500" alt="User Profile" />
         <div>
-          <h2 className="text-4xl font-bold">John Doe</h2>
-          <p className="text-blue-300">Travel Enthusiast & Adventure Seeker</p>
+          <h2 className="text-4xl font-bold">{userData?.name || "User Name"}</h2>
+          <p className="text-blue-300">{userData?.email || "user@example.com"}</p>
+          <p className="text-blue-300">{userData?.phone || "Phone Number"}</p>
           <button className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold transition">Edit Profile</button>
+          <button
+            className="mt-4 px-6 py-2 bg-red-500 hover:bg-red-600 rounded-full text-white font-semibold transition"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       </section>
 

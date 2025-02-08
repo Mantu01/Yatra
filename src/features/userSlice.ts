@@ -18,6 +18,10 @@ interface AuthState {
   loading: boolean;
   error: string | null;
 }
+interface LoginParams {
+  email: string;
+  password: string;
+}
 
 const initialState: AuthState = {
   userData: null,
@@ -37,7 +41,7 @@ export const getSignUp = createAsyncThunk("auth/getSignUp",async (data: UserData
   }
 });
 
-export const getLogin= createAsyncThunk("auth/getLogin",async (data:UserData, { rejectWithValue}) => {
+export const getLogin= createAsyncThunk("auth/getLogin",async (data:LoginParams, { rejectWithValue}) => {
   try {
     const { email, password } = data;
     const response = await authService.login({ email, password });
@@ -59,8 +63,8 @@ export const getCurrentUser= createAsyncThunk("auth/getCurrentUser",async()=>{
 });
 
 
-const authSlice = createSlice({
-  name: "auth",
+const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
     login: (state, action: PayloadAction<UserData>) => {
@@ -111,6 +115,7 @@ const authSlice = createSlice({
       .addCase(getCurrentUser.fulfilled, (state, action:any) => {
         state.loading = false;
         state.userData = action.payload;
+        state.isLoggedIn = true;
         state.error = null;
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
@@ -120,6 +125,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout } = userSlice.actions;
 
-export default authSlice.reducer;
+export default userSlice.reducer;
