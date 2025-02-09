@@ -22,9 +22,7 @@ export class UserService {
 
   async getUser(): Promise<UserData | null> {
     return new Promise<UserData | null>((resolve) => {
-      const unsubscribe = this.auth.onAuthStateChanged((user) => {
-        console.log(user);
-        
+      const unsubscribe = this.auth.onAuthStateChanged((user) => {        
         resolve(userFormat(user));
         unsubscribe();
       });
