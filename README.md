@@ -64,7 +64,7 @@ Check out the live version of **Yatra** here: [Yatra Live](https://yatra-eight.v
    ```bash
    npm run dev
    ```
-5. Open [http://localhost:5173](http://localhost:5173) in your browser.
+5. Open [http://localhost:5173](http://localhost:3000) in your browser.
 
 ## 🌟 Contributing
 We welcome contributions! Feel free to open an issue or submit a pull request.
