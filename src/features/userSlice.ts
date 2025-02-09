@@ -114,9 +114,14 @@ const userSlice = createSlice({
       })
       .addCase(getCurrentUser.fulfilled, (state, action:any) => {
         state.loading = false;
-        state.userData = action.payload;
-        state.isLoggedIn = true;
         state.error = null;
+        if(!action.payload.id){
+          state.userData = null;
+          state.isLoggedIn = false;
+        }else{
+          state.userData = action.payload;
+          state.isLoggedIn = true;
+        }
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
         state.loading = false;
