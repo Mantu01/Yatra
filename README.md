@@ -13,40 +13,48 @@
 - 🎟️ Exclusive travel deals & discounts
 - 📱 Fully responsive design for all devices
 
+## 🌐 Live Demo
+Check out the live version of **Yatra** here: [Yatra Live](https://yatra-eight.vercel.app/)
+
 ## 🏗️ Tech Stack
-- **Frontend:** React.js, Tailwind CSS
-- **Authentication:** Firebase/Auth0
-- **APIs:** Google Maps API, OpenWeather API
+- **Frontend:** React.js, TypeScript, Tailwind CSS
+- **Authentication:** Firebase Authentication
+- **Deployment:** Vercel
 
 ## 📂 Project Structure
 ```
 📂 src/
-│── 📂 components/
-│   │── Navbar.js
-│   │── Footer.js
-│   │── SearchBar.js
-│   │── DestinationCard.js
-│── 📂 pages/
-│   │── Home.js
-│   │── Destinations.js
-│   │── Booking.js
-│   │── Contact.js
-│── 📂 contexts/
-│   │── LanguageContext.js
-│── 📂 hooks/
-│   │── useFetch.js
-│── App.js
-│── index.js
+├── 📂 components/
+│   ├── Navbar.tsx
+│   ├── Footer.tsx
+│   ├── HeroSection.tsx
+│   ├── DestinationCard.tsx
+│   ├── BookingForm.tsx
+├── 📂 pages/
+│   ├── Home.tsx
+│   ├── Destinations.tsx
+│   ├── Booking.tsx
+│   ├── About.tsx
+│   └── Contact.tsx
+├── 📂 contexts/
+│   └── AuthContext.tsx
+├── 📂 hooks/
+│   └── useAuth.ts
+├── 📂 utils/
+│   └── api.ts
+├── App.tsx
+├── index.tsx
+├── routes.tsx
 ```
 
 ## 🛠️ Installation & Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/yatra.git
+   git clone https://github.com/Mantu01/Yatra.git
    ```
 2. Navigate to the project folder:
    ```bash
-   cd yatra
+   cd Yatra
    ```
 3. Install dependencies:
    ```bash
@@ -60,7 +68,6 @@
 
 ## 🌟 Contributing
 We welcome contributions! Feel free to open an issue or submit a pull request.
-
 
 🚀 **Start your adventure today with Yatra!** ✈️
 
